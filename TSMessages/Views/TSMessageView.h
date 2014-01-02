@@ -33,6 +33,8 @@
 /** The view controller this message is displayed in */
 @property (nonatomic, readonly) UIViewController *viewController;
 
+@property (nonatomic, readonly) UIView *view;
+
 /** The duration of the displayed message. If it is 0.0, it will automatically be calculated */
 @property (nonatomic, assign) CGFloat duration;
 
@@ -64,11 +66,13 @@
                type:(TSMessageNotificationType)notificationType
            duration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
+             inView:(UIView *)view
            callback:(void (^)())callback
         buttonTitle:(NSString *)buttonTitle
      buttonCallback:(void (^)())buttonCallback
          atPosition:(TSMessageNotificationPosition)position
   shouldBeDismissed:(BOOL)dismissAble;
+
 
 /** Fades out this notification view */
 - (void)fadeMeOut;

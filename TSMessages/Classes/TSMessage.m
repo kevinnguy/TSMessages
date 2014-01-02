@@ -103,6 +103,7 @@ __weak static UIViewController *_defaultViewController;
                                                        type:type
                                                    duration:duration
                                            inViewController:viewController
+                                                     inView:nil
                                                    callback:callback
                                                 buttonTitle:buttonTitle
                                              buttonCallback:buttonCallback
@@ -111,6 +112,33 @@ __weak static UIViewController *_defaultViewController;
     [self prepareNotificationToBeShown:v];
 }
 
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                    view:(UIView *)view
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                   image:(UIImage *)image
+                                    type:(TSMessageNotificationType)type
+                                duration:(NSTimeInterval)duration
+                                callback:(void (^)())callback
+                             buttonTitle:(NSString *)buttonTitle
+                          buttonCallback:(void (^)())buttonCallback
+                              atPosition:(TSMessageNotificationPosition)messagePosition
+                     canBeDismisedByUser:(BOOL)dismissingEnabled {
+    // Create the TSMessageView with view
+    TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
+                                                   subtitle:subtitle
+                                                      image:image
+                                                       type:type
+                                                   duration:duration
+                                           inViewController:viewController
+                                                     inView:view
+                                                   callback:callback
+                                                buttonTitle:buttonTitle
+                                             buttonCallback:buttonCallback
+                                                 atPosition:messagePosition
+                                          shouldBeDismissed:dismissingEnabled];
+    [self prepareNotificationToBeShown:v];
+}
 
 + (void)prepareNotificationToBeShown:(TSMessageView *)messageView
 {
@@ -162,7 +190,15 @@ __weak static UIViewController *_defaultViewController;
         verticalOffset += offset;
     };
     
-    if ([currentView.viewController isKindOfClass:[UINavigationController class]] || [currentView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
+    
+    if (currentView.view)
+    {
+        [currentView.view addSubview:currentView];
+        if ([TSMessage iOS7StyleEnabled]) {
+            addStatusBarHeightToVerticalOffset();
+        }
+    }
+    else if ([currentView.viewController isKindOfClass:[UINavigationController class]] || [currentView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
     {
         UINavigationController *currentNavigationController;
         

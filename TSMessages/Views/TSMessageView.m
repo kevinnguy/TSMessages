@@ -37,6 +37,7 @@ static NSMutableDictionary *_notificationDesign;
 /** The view controller this message is displayed in */
 @property (nonatomic, strong) UIViewController *viewController;
 
+@property (nonatomic, strong) UIView *view;
 
 /** Internal properties needed to resize the view on device rotation properly */
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -91,6 +92,7 @@ static NSMutableDictionary *_notificationDesign;
                type:(TSMessageNotificationType)notificationType
            duration:(CGFloat)duration
    inViewController:(UIViewController *)viewController
+             inView:(UIView *)view
            callback:(void (^)())callback
         buttonTitle:(NSString *)buttonTitle
      buttonCallback:(void (^)())buttonCallback
@@ -106,6 +108,7 @@ static NSMutableDictionary *_notificationDesign;
         _buttonTitle = buttonTitle;
         _duration = duration;
         _viewController = viewController;
+        _view = view;
         _messagePosition = position;
         self.callback = callback;
         self.buttonCallback = buttonCallback;
