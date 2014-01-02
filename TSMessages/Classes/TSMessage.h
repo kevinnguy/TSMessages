@@ -121,6 +121,13 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                               atPosition:(TSMessageNotificationPosition)messagePosition
                      canBeDismisedByUser:(BOOL)dismissingEnabled;
 
++ (void)showNotificationInView:(UIView *)view
+              inViewController:(UIViewController *)viewController
+                         title:(NSString *)title
+                      subtitle:(NSString *)subtitle
+                          type:(TSMessageNotificationType)type
+                      callback:(void (^)())callback;
+
 
 /** Fades out the currently displayed notification. If another notification is in the queue,
  the next one will be displayed automatically

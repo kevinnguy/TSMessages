@@ -140,6 +140,27 @@ __weak static UIViewController *_defaultViewController;
     [self prepareNotificationToBeShown:v];
 }
 
++ (void)showNotificationInView:(UIView *)view
+              inViewController:(UIViewController *)viewController
+                         title:(NSString *)title
+                      subtitle:(NSString *)subtitle
+                          type:(TSMessageNotificationType)type
+                      callback:(void (^)())callback {
+    [self showNotificationInViewController:viewController
+                                      view:view
+                                     title:title
+                                  subtitle:subtitle
+                                     image:nil
+                                      type:type
+                                  duration:TSMessageNotificationDurationEndless
+                                  callback:callback
+                               buttonTitle:nil
+                            buttonCallback:nil
+                                atPosition:TSMessageNotificationPositionTop
+                       canBeDismisedByUser:YES];
+}
+
+
 + (void)prepareNotificationToBeShown:(TSMessageView *)messageView
 {
     NSString *title = messageView.title;
