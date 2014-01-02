@@ -483,6 +483,8 @@ static NSMutableDictionary *_notificationDesign;
         {
             self.callback();
         }
+        
+        [self fadeMeOut];
     }
 }
 
