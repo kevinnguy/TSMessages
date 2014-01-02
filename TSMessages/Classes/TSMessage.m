@@ -194,9 +194,6 @@ __weak static UIViewController *_defaultViewController;
     if (currentView.view)
     {
         [currentView.view addSubview:currentView];
-        if ([TSMessage iOS7StyleEnabled]) {
-            addStatusBarHeightToVerticalOffset();
-        }
     }
     else if ([currentView.viewController isKindOfClass:[UINavigationController class]] || [currentView.viewController.parentViewController isKindOfClass:[UINavigationController class]])
     {
