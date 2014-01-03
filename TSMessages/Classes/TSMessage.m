@@ -163,16 +163,16 @@ __weak static UIViewController *_defaultViewController;
 
 + (void)prepareNotificationToBeShown:(TSMessageView *)messageView
 {
-    NSString *title = messageView.title;
-    NSString *subtitle = messageView.subtitle;
-    
-    for (TSMessageView *n in [TSMessage sharedMessage].messages)
-    {
-        if (([n.title isEqualToString:title] || (!n.title && !title)) && ([n.subtitle isEqualToString:subtitle] || (!n.subtitle && !subtitle)))
-        {
-            return; // avoid showing the same messages twice in a row
-        }
-    }
+//    NSString *title = messageView.title;
+//    NSString *subtitle = messageView.subtitle;
+//    
+//    for (TSMessageView *n in [TSMessage sharedMessage].messages)
+//    {
+//        if (([n.title isEqualToString:title] || (!n.title && !title)) && ([n.subtitle isEqualToString:subtitle] || (!n.subtitle && !subtitle)))
+//        {
+//            return; // avoid showing the same messages twice in a row
+//        }
+//    }
     
     [[TSMessage sharedMessage].messages addObject:messageView];
     
